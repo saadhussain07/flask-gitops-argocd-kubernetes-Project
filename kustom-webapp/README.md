@@ -1,40 +1,67 @@
-# Installation
-```
-kubectl version
-```
-*If you have 1.21 or above of kubectl you will have access to kubectl kustomize which is the recommended method. If you aren't on version 1.21 or above, upgrade kubectl.
-*You could also download/use the 'kutomize' binary seperatly but the cmds are different.
+# 🧩 ArgoCD + Kustomize Deployment
 
+This module demonstrates deploying applications using **Kustomize with ArgoCD**.
 
-# Viewing Kustomize Configs - (Using kubectl kustomize integration)
-```
-kubectl kustomize .
-kubectl kustomize overlays/dev/
-kubectl kustomize overlays/prod/
-```
+---
 
-# Applying Kustomize Configs - (Using kubectl kustomize integration)
-```
-kubectl apply -k .
-kubectl apply -k overlays/dev/
-kubectl apply -k overlays/prod/
-```
-Note: if you get field is immutable error, check your configuration and try deleting the resources.
+## 📌 Overview
 
+Kustomize allows you to customize Kubernetes YAML configurations without modifying the original files.
 
-# Creating Namespaces if you dont have them already
+---
+
+## 📁 Structure
+
 ```
-kubectl create namespace dev; kubectl create namespace prod;
+kustomize-app/
+├── base/
+└── overlays/
+    ├── dev/
+    └── prod/
 ```
 
+---
 
-# Accessing the application
-```
-minikube service kustom-mywebapp-v1
-minikube service kustom-mywebapp-v1 -n dev
-minikube service kustom-mywebapp-v1 -n prod
+## ⚙️ Deployment via ArgoCD
+
+```bash
+argocd app create kustomize-app \
+--repo <your-repo-url> \
+--path kustomize-app/overlays/prod \
+--dest-server https://kubernetes.default.svc \
+--dest-namespace prod
 ```
 
-# References:
-https://github.com/kubernetes-sigs/kustomize/blob/master/README.md
-https://kubectl.docs.kubernetes.io/guides/config_management/offtheshelf/
+---
+
+## 🔄 How It Works
+
+* **Base** → Common configuration
+* **Overlays** → Environment-specific changes
+
+---
+
+## 🌍 Environments
+
+| Environment | Purpose    |
+| ----------- | ---------- |
+| dev         | Testing    |
+| prod        | Production |
+
+---
+
+## ✅ Key Benefits of Kustomize
+
+* No templating language
+* Native Kubernetes integration
+* Clean separation of environments
+
+---
+
+## 🧠 Use Case
+
+Best suited for:
+
+* Environment-specific deployments
+* Simpler YAML customization
+* GitOps workflows
