@@ -60,8 +60,6 @@ ArgoCd-Projects/
 ├── kustomize-app/       # Kustomize-based deployment
 │   └── README.md
 │
-├── argocd/              # ArgoCD application manifests
-│
 └── README.md            # Main documentation
 ```
 
