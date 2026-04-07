@@ -155,7 +155,7 @@ argocd app create kustomize-app \
 
 ---
 
-## 📸 Suggested Improvements (Optional)
+## 📸 Suggested Improvements 
 
 * Add ArgoCD UI screenshots
 * Integrate CI pipeline (GitHub Actions)
