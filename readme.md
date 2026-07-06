@@ -32,20 +32,12 @@ The goal is to provide a **comparative, hands-on implementation** of both approa
 
 ## 🏗️ Architecture
 
-```mermaid id="y7t2v1"
-flowchart LR
-    Dev[Developer] -->|Push Code| GitHub[(Git Repository)]
-    GitHub -->|Sync| ArgoCD[ArgoCD Controller]
-    ArgoCD -->|Deploy| K8s[Kubernetes Cluster]
+<p align="center">
+  <img src="/architecture.png" alt="GitOps Architecture" width="1000">
+</p>
 
-    subgraph Apps
-        HelmApp[Helm Application]
-        KustomizeApp[Kustomize Application]
-    end
+This project follows a GitOps workflow where developers push code to GitHub, GitHub Actions builds and publishes the Docker image, ArgoCD continuously monitors the repository, and Kubernetes automatically deploys the latest desired state using Helm.
 
-    ArgoCD --> HelmApp
-    ArgoCD --> KustomizeApp
-```
 
 ---
 
